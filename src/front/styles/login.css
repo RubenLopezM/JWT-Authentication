@@ -1,0 +1,28 @@
+.login__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.login__title {
+  margin-top: 2rem;
+}
+
+.login__button {
+  display: flex;
+  margin: auto;
+  margin-top: 1rem;
+  border: 0.1rem solid black;
+  font-weight: bold;
+}
+
+.login__input {
+  border-radius: 2%;
+  margin: 1rem 1rem;
+  border: 0.1rem solid black;
+}
+
+.login__label {
+  font-weight: bold;
+}

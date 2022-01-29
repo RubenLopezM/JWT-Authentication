@@ -1,49 +1,60 @@
+import jwt_decode from "jwt-decode";
+
 const getState = ({ getStore, getActions, setStore }) => {
-	return {
-		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
-		},
-		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
+  return {
+    store: {
+      message: null,
+      baseUrl:
+        "https://3001-4geeksacademy-reactflask-70h2suyshjh.ws-eu29.gitpod.io/api/",
+    },
+    actions: {
+      // Use getActions to call a function within a fuction
+      register: async (data) => {
+        const opt = {
+          method: "POST",
+          headers: new Headers({
+            "Content-Type": "application/json",
+          }),
+          body: JSON.stringify(data),
+        };
 
-			getMessage: () => {
-				// fetching data from the backend
-				fetch(process.env.BACKEND_URL + "/api/hello")
-					.then(resp => resp.json())
-					.then(data => setStore({ message: data.message }))
-					.catch(error => console.log("Error loading message from backend", error));
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
+        try {
+          const resp = await fetch(getStore().baseUrl.concat("user"), opt);
+          if (resp.status !== 200) {
+            // alert("There has been some error");
+            return false;
+          }
+          const data = await resp.json();
+        } catch (error) {
+          console.error("There was an error!!", error);
+        }
+      },
+      login: async (data) => {
+        const opts = {
+          method: "POST",
+          headers: new Headers({
+            "Content-Type": "application/json",
+          }),
+          body: JSON.stringify(data),
+        };
 
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
+        try {
+          const resp = await fetch(getStore().baseUrl.concat("login"), opts);
+          if (resp.status !== 200) {
+            // alert("There has been some error");
+          }
 
-				//reset the global store
-				setStore({ demo: demo });
-			}
-		}
-	};
+          const data = await resp.json();
+          console.log("this came from the backend", data);
+
+          sessionStorage.setItem("token", data.token);
+          const tokenDecoded = jwt_decode(data.token);
+        } catch (error) {
+          console.error("There was an error!!", error);
+        }
+      },
+    },
+  };
 };
 
 export default getState;

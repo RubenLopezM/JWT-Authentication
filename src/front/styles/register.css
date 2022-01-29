@@ -1,0 +1,29 @@
+.signup__input {
+  border-radius: 2%;
+  margin: 1rem 1rem;
+  border: 0.1rem solid black;
+}
+
+.signup__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup__title {
+  margin: 1rem;
+}
+
+.signup__label {
+  font-weight: bold;
+}
+
+.signup__button {
+  width: 6rem;
+  display: flex;
+  margin: auto;
+  margin-top: 1.5rem;
+  border: 0.1rem solid black;
+  font-weight: bold;
+}
