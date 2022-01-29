@@ -16,11 +16,11 @@ const Private = () => {
   }, []);
 
   return (
-      <div>
-          <Navbar></Navbar>
-          <div>This is the private component </div>
-      </div>)
-  
+    <div>
+      <Navbar></Navbar>
+      <div>This is a private component </div>
+    </div>
+  );
 };
 
 export default Private;
