@@ -10,7 +10,7 @@ export const Home = () => {
   return (
     <div>
       <Navbar></Navbar>
-      <div className="text-center mt-5">Welcome to the application</div>;
+      <div className="text-center mt-5">Welcome to this application</div>;
     </div>
   );
 };
